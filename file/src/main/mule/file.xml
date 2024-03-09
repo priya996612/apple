@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:file="http://www.mulesoft.org/schema/mule/file"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<file:config name="File_Config" doc:name="File Config" doc:id="74e66a10-d6b0-40bb-b4b8-7e78baa55d99" />
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="10c1e6d7-7d31-41df-8856-2b975b4edceb" >
+		<http:listener-connection host="localhost" port="8081" />
+	</http:listener-config>
+	<flow name="fileFlow1" doc:id="632ed4e7-c19d-4f5b-8cd2-1fbd8ff4b121" >
+		<file:listener doc:name="On New or Updated File" doc:id="5c6a41aa-f1c8-4729-b7fc-78ab3dee8d29" config-ref="File_Config" directory="C:\Users\user\Desktop\source" timeBetweenSizeCheckUnit="MILLISECONDS" moveToDirectory="C:\Users\user\Desktop\target">
+			<scheduling-strategy >
+				<fixed-frequency frequency="1" timeUnit="HOURS"/>
+			</scheduling-strategy>
+		</file:listener>
+		<logger level="INFO" doc:name="Logger" doc:id="74f0f386-b2fc-4b75-a688-14cdd42fba29" message="hi"/>
+	</flow>
+</mule>
